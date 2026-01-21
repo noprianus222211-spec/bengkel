@@ -5,8 +5,8 @@ if (isset($_POST['bayar'])) {
     $kode_transaksi = $_POST['kode_transaksi'];
     $sts = "Berhasil";
     $kode_customer = $_POST['kode_customer'];
-    $hargajasa = $_POST['hargajasa'];
-    $total = $_POST['total'];
+    // $hargajasa = $_POST['hargajasa'];
+    // $total = $_POST['total'];
     $jumlah_uang = $_POST['jumlah_uang'];
     $kembalian = $_POST['kembalian'];
 
@@ -32,8 +32,6 @@ if (isset($_POST['bayar'])) {
     //           VALUES ('$kode_transaksi', '$kode_customer', '$hargajasa', '$total', '$jumlah_uang', '$kembalian')";
     $query =    "UPDATE transaksi_222211 
                 SET 
-                    222211_hargajasa = '$hargajasa',
-                    222211_total = '$total',
                     222211_jumlah = '$jumlah_uang',
                     222211_kembalian = '$kembalian'
                 WHERE 222211_kodetransaksi = '$kode_transaksi'";
