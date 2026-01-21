@@ -1,10 +1,10 @@
 <?php
 $hostname = 'localhost';
 $username = 'root';
-$password = 'root';
+$password = '';
 $dbname = 'bengkel_222211';
 
-$token = '8QHEKxUJAFJhCzQU5UqC';
+$token = '332XQoCECH2J3u14jXaA';
 
 $conn = mysqli_connect($hostname, $username, $password, $dbname)or die ('GAGAL KONEKSI');
 ?>
