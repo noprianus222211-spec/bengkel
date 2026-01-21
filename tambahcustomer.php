@@ -80,7 +80,7 @@
         $nourut++;
         $char = "TRNS";
         $kodetrx = $char . sprintf("%03s", $nourut);
-        $textDetail += (int) $hargajasa;
+        $textTotal += $hargajasa;
         $add_transaction = mysqli_query($conn, "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_spareparts, 222211_hargajasa, 222211_total) 
             VALUES ('$kodetrx', '$kode', '$sparepartNamesString', '$hargajasa', '$textDetail')");
         // 
