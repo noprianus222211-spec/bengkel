@@ -102,7 +102,7 @@
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
         'target' => $notlp,
-        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n".$textDetail."• ".$hargajasa."\n"."Total: ".rupiah($textTotal)."\n\n" .
+        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n".$textDetail."• Harga Jasa Pengerjaan: ".$hargajasa."\n"."Total: ".rupiah($textTotal)."\n\n" .
         "Terima kasih", 
         'countryCode' => '62',
         ),
