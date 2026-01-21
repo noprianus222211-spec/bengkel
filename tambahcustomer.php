@@ -80,7 +80,7 @@
         $nourut++;
         $char = "TRNS";
         $kodetrx = $char . sprintf("%03s", $nourut);
-        $textDetail += $hargajasa;
+        $textDetail += (int) $hargajasa;
         $add_transaction = mysqli_query($conn, "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_spareparts, 222211_hargajasa, 222211_total) 
             VALUES ('$kodetrx', '$kode', '$sparepartNamesString', '$hargajasa', '$textDetail')");
         // 
@@ -102,7 +102,7 @@
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
         'target' => $notlp,
-        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n".$textDetail."• Harga Jasa Pengerjaan: ".$hargajasa."\n"."Total: ".rupiah($textTotal)."\n\n" .
+        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n".$textDetail."• Harga Jasa Pengerjaan: ".rupiah($hargajasa)."\n"."Total: ".rupiah($textTotal)."\n\n" .
         "Terima kasih", 
         'countryCode' => '62',
         ),
