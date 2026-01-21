@@ -121,10 +121,9 @@ $kode = $char . sprintf("%03s", $nourut);
                                                             <p><?php echo $transaksi['222211_kerusakan']; ?></p>
                                                         </div>
 
-                                                        <!-- <div class="input-group input-group-outline is-filled mb-3">
-                                                            <label class="form-label">Harga Jasa</label>
-                                                            <input type="number" name="hargajasa" id="hargajasa_<?php echo $transaksi['222211_kodecustomer']; ?>" class="form-control" value="0" oninput="updateTotal('<?php echo $transaksi['222211_kodecustomer']; ?>','<?=$itemPrice?>')" required>
-                                                        </div> -->
+                                                        <div class="mb-3">
+                                                            <div>Harga Jasa Pengerjaan: <b><?=rupiah($dataspare['222211_hargajasa'])?></b></div>
+                                                        </div>
 
                                                         <div class="mb-3">
                                                             <label class="form-label">Pilih Spareparts</label><br>
