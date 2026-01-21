@@ -157,6 +157,10 @@
                             <label for="kerusakan" class="form-label">Kerusakan</label>
                             <textarea name="kerusakan" class="form-control"></textarea>
                         </div>
+                        <div class="input-group input-group-outline is-filled mb-3">
+                            <label class="form-label">Harga Jasa</label>
+                            <input type="number" name="hargajasa" class="form-control" placeholder="0" required>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Pilih Spareparts</label><br>
                             <?php

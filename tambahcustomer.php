@@ -11,6 +11,7 @@
         $merk = $_POST['merk'];
         $tanggal_service = $_POST['tanggal_service'];
         $kerusakan = $_POST['kerusakan'];
+        $hargajasa = $_POST['hargajasa'];
         $status = "Proses";
 
         // Initialize error message variable
@@ -79,8 +80,9 @@
         $nourut++;
         $char = "TRNS";
         $kodetrx = $char . sprintf("%03s", $nourut);
-        $add_transaction = mysqli_query($conn, "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_spareparts) 
-            VALUES ('$kodetrx', '$kode', '$sparepartNamesString')");
+        $textDetail += $hargajasa;
+        $add_transaction = mysqli_query($conn, "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_spareparts, 222211_hargajasa, 222211_total) 
+            VALUES ('$kodetrx', '$kode', '$sparepartNamesString', '$hargajasa', '$textDetail')");
         // 
 
         $query = mysqli_query($conn, "INSERT INTO kendaraan_222211 (222211_kodecustomer, 222211_plat, 222211_jenis, 222211_merk, 222211_tgl, 222211_kerusakan, 222211_status) 
@@ -100,7 +102,7 @@
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
         'target' => $notlp,
-        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n\n".$textDetail."\n"."Total: ".rupiah($textTotal)."\n\n" .
+        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n".$textDetail."• ".$hargajasa."\n"."Total: ".rupiah($textTotal)."\n\n" .
         "Terima kasih", 
         'countryCode' => '62',
         ),

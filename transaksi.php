@@ -121,10 +121,10 @@ $kode = $char . sprintf("%03s", $nourut);
                                                             <p><?php echo $transaksi['222211_kerusakan']; ?></p>
                                                         </div>
 
-                                                        <div class="input-group input-group-outline is-filled mb-3">
+                                                        <!-- <div class="input-group input-group-outline is-filled mb-3">
                                                             <label class="form-label">Harga Jasa</label>
                                                             <input type="number" name="hargajasa" id="hargajasa_<?php echo $transaksi['222211_kodecustomer']; ?>" class="form-control" value="0" oninput="updateTotal('<?php echo $transaksi['222211_kodecustomer']; ?>','<?=$itemPrice?>')" required>
-                                                        </div>
+                                                        </div> -->
 
                                                         <div class="mb-3">
                                                             <label class="form-label">Pilih Spareparts</label><br>
@@ -139,12 +139,12 @@ $kode = $char . sprintf("%03s", $nourut);
 
                                                         <div class="input-group input-group-outline is-filled mb-3">
                                                             <label class="form-label">Total</label>
-                                                            <input type="number" name="total" id="total_<?php echo $transaksi['222211_kodecustomer']; ?>" class="form-control" value="0" readonly>
+                                                            <input type="number" name="total" class="form-control" value="<?=$dataspare['222211_total']?>" readonly>
                                                         </div>
 
                                                         <div class="input-group input-group-outline is-filled mb-3">
                                                             <label class="form-label">Jumlah Uang</label>
-                                                            <input type="number" name="jumlah_uang" id="jumlah_uang_<?php echo $transaksi['222211_kodecustomer']; ?>" class="form-control" value="0" oninput="updateKembalian('<?php echo $transaksi['222211_kodecustomer']; ?>')" required>
+                                                            <input type="number" name="jumlah_uang" id="jumlah_uang_<?php echo $transaksi['222211_kodecustomer']; ?>" class="form-control" value="0" oninput="updateKembalian('<?php echo $transaksi['222211_kodecustomer']; ?>', '<?=$dataspare['222211_total']?>')" required>
                                                         </div>
 
                                                         <div class="input-group input-group-outline is-filled mb-3">
@@ -184,10 +184,10 @@ $kode = $char . sprintf("%03s", $nourut);
         updateKembalian(kodeCustomer);
     }
 
-    function updateKembalian(kodeCustomer) {
-        const total = parseFloat(document.getElementById('total_' + kodeCustomer).value) || 0;
+    function updateKembalian(kodeCustomer, total) {
+        // const total = parseFloat(document.getElementById('total_' + kodeCustomer).value) || 0;
         const jumlahUang = parseFloat(document.getElementById('jumlah_uang_' + kodeCustomer).value) || 0;
-        const kembalian = jumlahUang - total;
+        const kembalian = jumlahUang - parseFloat(total);
         document.getElementById('kembalian_' + kodeCustomer).value = kembalian >= 0 ? kembalian : 0;
     }
 </script>
