@@ -10,23 +10,34 @@ if (isset($_POST['bayar'])) {
     $jumlah_uang = $_POST['jumlah_uang'];
     $kembalian = $_POST['kembalian'];
 
-    $spareparts = isset($_POST['spareparts']) ? $_POST['spareparts'] : [];
-    $sparepartNames = [];
-    foreach ($spareparts as $kode_sparepart) {
-        $sparepartQuery = "SELECT 222211_namaspareparts FROM spareparts_222211 WHERE 222211_kodespareparts = '$kode_sparepart'";
-        $result = mysqli_query($conn, $sparepartQuery);
-        if ($row = mysqli_fetch_assoc($result)) {
-            $sparepartNames[] = $row['222211_namaspareparts'];
-        }
-        $updateStokQuery = "UPDATE spareparts_222211 SET 222211_stok = 222211_stok - 1 WHERE 222211_kodespareparts = '$kode_sparepart'";
-        mysqli_query($conn, $updateStokQuery);
+    // $spareparts = isset($_POST['spareparts']) ? $_POST['spareparts'] : [];
+    // $sparepartNames = [];
+    // foreach ($spareparts as $kode_sparepart) {
+    //     $sparepartQuery = "SELECT 222211_namaspareparts FROM spareparts_222211 WHERE 222211_kodespareparts = '$kode_sparepart'";
+    //     $result = mysqli_query($conn, $sparepartQuery);
+    //     if ($row = mysqli_fetch_assoc($result)) {
+    //         $sparepartNames[] = $row['222211_namaspareparts'];
+    //     }
+    //     $updateStokQuery = "UPDATE spareparts_222211 SET 222211_stok = 222211_stok - 1 WHERE 222211_kodespareparts = '$kode_sparepart'";
+    //     mysqli_query($conn, $updateStokQuery);
 
-        $updatePembayaranQuery = "UPDATE kendaraan_222211 SET 222211_pembayaran = '$sts' WHERE 222211_kodecustomer = '$kode_customer'";
-        mysqli_query($conn, $updatePembayaranQuery);
-    }
-    $sparepartNamesString = implode(', ', $sparepartNames);
-    $query = "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_spareparts, 222211_hargajasa, 222211_total, 222211_jumlah, 222211_kembalian) 
-              VALUES ('$kode_transaksi', '$kode_customer', '$sparepartNamesString', '$hargajasa', '$total', '$jumlah_uang', '$kembalian')";
+    //     $updatePembayaranQuery = "UPDATE kendaraan_222211 SET 222211_pembayaran = '$sts' WHERE 222211_kodecustomer = '$kode_customer'";
+    //     mysqli_query($conn, $updatePembayaranQuery);
+    // }
+    // $sparepartNamesString = implode(', ', $sparepartNames);
+    
+    $updatePembayaranQuery = "UPDATE kendaraan_222211 SET 222211_pembayaran = '$sts' WHERE 222211_kodecustomer = '$kode_customer'";
+    mysqli_query($conn, $updatePembayaranQuery);
+    // $query = "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_hargajasa, 222211_total, 222211_jumlah, 222211_kembalian) 
+    //           VALUES ('$kode_transaksi', '$kode_customer', '$hargajasa', '$total', '$jumlah_uang', '$kembalian')";
+    $query =    "UPDATE transaksi_222211 
+                SET 
+                    222211_hargajasa = '$hargajasa',
+                    222211_total = '$total',
+                    222211_jumlah = '$jumlah_uang',
+                    222211_kembalian = '$kembalian'
+                WHERE 222211_kodetransaksi = '$kode_transaksi'";
+    
     if (mysqli_query($conn, $query)) {
         echo "<script>alert('Berhasil Membayar!'); window.location.href='transaksi.php';</script>";
     } else {

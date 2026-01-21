@@ -71,7 +71,7 @@ $kode = $char . sprintf("%03s", $nourut);
                                         <td class="align-middle text-center"><?php echo $transaksi['222211_pembayaran']; ?></td>
                                         <td class="align-middle text-center">
                                             <?php if ($transaksi['222211_pembayaran'] == 'Berhasil') { ?>
-                                                <a href="cetakstruk.php?kode=<?php echo $transaksi['222211_kodecustomer']; ?>" class="badge badge-sm bg-info">Cetak Struk</a>
+                                                <a target="blank" href="cetakstruk.php?kode=<?php echo $transaksi['222211_kodecustomer']; ?>" class="badge badge-sm bg-info">Cetak Struk</a>
                                             <?php } else { ?>
                                                 <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-success" data-bs-target="#bayar<?php echo $transaksi['222211_kodecustomer']; ?>">Bayar</a>
                                             <?php } ?>
@@ -87,9 +87,35 @@ $kode = $char . sprintf("%03s", $nourut);
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="prosestransaksi.php" method="POST">
-                                                        <input type="hidden" name="kode_transaksi" value="<?php echo $kode; ?>">
+                                                        <!-- <input type="hidden" name="kode_transaksi" value="<?php echo $kode; ?>"> -->
                                                         <input type="hidden" name="kode_customer" value="<?php echo $transaksi['222211_kodecustomer']; ?>">
+                                                        <?php
+                                                            $trxcd = $transaksi['222211_kodecustomer'];
+                                                            $querypart = mysqli_query($conn, "SELECT * FROM transaksi_222211
+                                                                WHERE 222211_kodecustomer = '$trxcd' LIMIT 1");
 
+                                                            $dataspare = mysqli_fetch_assoc($querypart);
+                                                            $valuesparepart_db = $dataspare['222211_spareparts'];
+                                                            // echo $valuesparepart;
+
+                                                            $sparepartArray = array_map('trim', explode(',', $valuesparepart_db));
+
+                                                            // escape + quote
+                                                            $escaped = array_map(function($val) use ($conn) {
+                                                                return "'" . mysqli_real_escape_string($conn, $val) . "'";
+                                                            }, $sparepartArray);
+
+                                                            // gabungkan untuk IN (...)
+                                                            $valuesparepart = implode(',', $escaped);
+
+                                                            $sparepartsQueryCal = mysqli_query($conn, "SELECT * FROM spareparts_222211 WHERE 222211_namaspareparts IN ($valuesparepart)");
+                                                            $sparepartsQuery = mysqli_query($conn, "SELECT * FROM spareparts_222211 WHERE 222211_namaspareparts IN ($valuesparepart)");
+                                                            $itemPrice = 0;
+                                                            while ($ip = mysqli_fetch_array($sparepartsQueryCal)) {
+                                                                $itemPrice += $ip['222211_hargaspareparts'];
+                                                            }
+                                                        ?>
+                                                        <input type="hidden" name="kode_transaksi" value="<?php echo $dataspare['222211_kodetransaksi']; ?>">
                                                         <div class="mb-4">
                                                             <label class="form-label">Info Kerusakan</label>
                                                             <p><?php echo $transaksi['222211_kerusakan']; ?></p>
@@ -97,18 +123,16 @@ $kode = $char . sprintf("%03s", $nourut);
 
                                                         <div class="input-group input-group-outline is-filled mb-3">
                                                             <label class="form-label">Harga Jasa</label>
-                                                            <input type="number" name="hargajasa" id="hargajasa_<?php echo $transaksi['222211_kodecustomer']; ?>" class="form-control" value="0" oninput="updateTotal('<?php echo $transaksi['222211_kodecustomer']; ?>')" required>
+                                                            <input type="number" name="hargajasa" id="hargajasa_<?php echo $transaksi['222211_kodecustomer']; ?>" class="form-control" value="0" oninput="updateTotal('<?php echo $transaksi['222211_kodecustomer']; ?>','<?=$itemPrice?>')" required>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label class="form-label">Pilih Spareparts</label><br>
                                                             <?php
-                                                            $sparepartsQuery = mysqli_query($conn, "SELECT * FROM spareparts_222211");
                                                             while ($sparepart = mysqli_fetch_array($sparepartsQuery)) {
                                                             ?>
                                                                 <div>
-                                                                    <input type="checkbox" name="spareparts[]" value="<?php echo $sparepart['222211_kodespareparts']; ?>" onchange="updateTotal('<?php echo $transaksi['222211_kodecustomer']; ?>')">
-                                                                    <?php echo $sparepart['222211_namaspareparts'] . " - " . $sparepart['222211_hargaspareparts']; ?>
+                                                                    <?php echo $sparepart['222211_namaspareparts'] . " - <b>" . rupiah($sparepart['222211_hargaspareparts'])."</b>" ?>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
@@ -147,15 +171,15 @@ $kode = $char . sprintf("%03s", $nourut);
     </div>
 </div>
 <script>
-    function updateTotal(kodeCustomer) {
+    function updateTotal(kodeCustomer, price) {
         let total = 0;
         const hargaJasa = parseFloat(document.getElementById('hargajasa_' + kodeCustomer).value) || 0;
-        const checkboxes = document.querySelectorAll('input[name="spareparts[]"]:checked');
-        checkboxes.forEach((checkbox) => {
-            const sparepartValue = parseFloat(checkbox.nextSibling.textContent.split('-')[1].trim());
-            total += sparepartValue;
-        });
-        total += hargaJasa;
+        // const checkboxes = document.querySelectorAll('input[name="spareparts[]"]:checked');
+        // checkboxes.forEach((checkbox) => {
+        //     const sparepartValue = parseFloat(checkbox.nextSibling.textContent.split('-')[1].trim());
+        //     total += sparepartValue;
+        // });
+        total = hargaJasa + parseFloat(price);
         document.getElementById('total_' + kodeCustomer).value = total;
         updateKembalian(kodeCustomer);
     }

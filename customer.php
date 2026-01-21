@@ -157,6 +157,18 @@
                             <label for="kerusakan" class="form-label">Kerusakan</label>
                             <textarea name="kerusakan" class="form-control"></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Pilih Spareparts</label><br>
+                            <?php
+                            $sparepartsQuery = mysqli_query($conn, "SELECT * FROM spareparts_222211");
+                            while ($sparepart = mysqli_fetch_array($sparepartsQuery)) {
+                            ?>
+                                <div>
+                                    <input type="checkbox" name="spareparts[]" value="<?php echo $sparepart['222211_kodespareparts']; ?>" onchange="updateTotal('<?php echo $transaksi['222211_kodecustomer']; ?>')">
+                                    <?php echo $sparepart['222211_namaspareparts'] . " - <b>" . rupiah($sparepart['222211_hargaspareparts'])."</b>" ?>
+                                </div>
+                            <?php } ?>
+                        </div>
                         <div class="modal-footer justify-content-left">
                             <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn bg-gradient-dark" name="tambah">Tambah</button>

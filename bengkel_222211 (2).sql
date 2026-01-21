@@ -62,7 +62,8 @@ CREATE TABLE `customer_222211` (
   `222211_idcustomer` int(12) NOT NULL,
   `222211_kodecustomer` varchar(100) DEFAULT NULL,
   `222211_nama` varchar(100) DEFAULT NULL,
-  `222211_notlp` varchar(100) DEFAULT NULL
+  `222211_notlp` varchar(100) DEFAULT NULL,
+  `222211_id_transaksi` int(5) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

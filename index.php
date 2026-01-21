@@ -5,6 +5,9 @@
         header('location:login.php');
         exit();
     }
+    function rupiah($angka) {
+        return 'Rp ' . number_format((float)$angka, 0, ',', '.');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
