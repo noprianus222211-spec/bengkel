@@ -31,6 +31,7 @@
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Kode</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nama</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Kategori Sparepart</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Merk</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Harga</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Stok</th>
@@ -39,14 +40,15 @@
                             </thead>
                             <tbody>
                             <?php
-                                $query = mysqli_query($conn, "SELECT * FROM spareparts_222211");
+                                $query = mysqli_query($conn, "SELECT * FROM spareparts_222211 ORDER BY 222211_kategori_sparepart ASC");
                                 while ($spareparts = mysqli_fetch_array($query)) {
                             ?>
                                 <tr>
                                     <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_kodespareparts']; ?></p></td>
-                                    <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_namaspareparts']; ?></p></td>
+                                    <td class="align-middle"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_namaspareparts']; ?></p></td>
+                                    <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_kategori_sparepart']; ?></p></td>
                                     <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_merkspareparts']; ?></p></td>
-                                    <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0">Rp. <?php echo number_format($spareparts['222211_hargaspareparts']); ?></p></td>
+                                    <td class="align-middle text-right"><p class="text-md font-weight-bold mb-0">Rp. <?php echo number_format($spareparts['222211_hargaspareparts']); ?></p></td>
                                     <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_stok']; ?></p></td>
                                     <td class="align-middle text-center">
                                         <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-info" data-bs-target="#edit<?php echo $spareparts['222211_idspareparts']; ?>">Edit</a>
@@ -69,6 +71,25 @@
                                                     <div class="input-group input-group-outline is-filled mb-4">
                                                         <label for="nama" class="form-label">Nama</label>
                                                         <input type="text" class="form-control" name="nama" value="<?php echo $spareparts['222211_namaspareparts']; ?>" required>
+                                                    </div>
+                                                    <div class="input-group input-group-outline is-filled mb-4">
+                                                        <label for="kategori_sparepart" class="form-label">Kategori Sparepart</label>
+                                                        <?php
+                                                            $currentKategori = $spareparts['222211_kategori_sparepart'];
+                                                        ?>
+                                                        <select name="kategori_sparepart" id="kategori_sparepart" class="form-control">
+                                                            <option value="Ganti Oli" <?= $currentKategori == 'Ganti Oli' ? 'selected' : '' ?>>Ganti Oli</option>
+                                                            <option value="Tune Up" <?= $currentKategori == 'Tune Up' ? 'selected' : '' ?>>Tune Up</option>
+                                                            <option value="Overhaul" <?= $currentKategori == 'Overhaul' ? 'selected' : '' ?>>Overhaul</option>
+                                                            <option value="Kaki-Kaki" <?= $currentKategori == 'Kaki-Kaki' ? 'selected' : '' ?>>Kaki-Kaki</option>
+                                                            <option value="Kelistrikan" <?= $currentKategori == 'Kelistrikan' ? 'selected' : '' ?>>Kelistrikan</option>
+                                                            <option value="Cas Aki" <?= $currentKategori == 'Cas Aki' ? 'selected' : '' ?>>Cas Aki</option>
+                                                            <option value="Body Repair" <?= $currentKategori == 'Body Repair' ? 'selected' : '' ?>>Body Repair</option>
+                                                            <option value="Body Dico" <?= $currentKategori == 'Body Dico' ? 'selected' : '' ?>>Body Dico</option>
+                                                            <option value="Service AC dan Isi Freon" <?= $currentKategori == 'Service AC dan Isi Freon' ? 'selected' : '' ?>>
+                                                                Service AC dan Isi Freon
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                     <div class="input-group input-group-outline is-filled mb-4">
                                                         <label for="merk" class="form-label">Merk</label>
@@ -130,19 +151,34 @@
                             <label for="kode" class="form-label">Kode</label>
                             <input type="text" class="form-control" name="kode" value="<?php echo $kode; ?>" readonly>
                         </div>
-                        <div class="input-group input-group-outline mb-4">
+                        <div class="input-group input-group-outline is-filled mb-4">
                             <label for="nama" class="form-label">Nama</label>
                             <input type="text" class="form-control" name="nama" required>
                         </div>
-                        <div class="input-group input-group-outline mb-4">
+                        <div class="input-group input-group-outline is-filled mb-4">
+                            <label for="kategori_sparepart" class="form-label">Kategori Sparepart</label>
+                            <select name="kategori_sparepart" id="kategori_sparepart" class="form-control">
+                                <option disabled selected>Pilih Kategori Sparepart</option>
+                                <option value="Ganti Oli">Ganti Oli</option>
+                                <option value="Tune Up">Tune Up</option>
+                                <option value="Overhaul">Overhaul</option>
+                                <option value="Kaki-Kaki">Kaki-Kaki</option>
+                                <option value="Kelistrikan">Kelistrikan</option>
+                                <option value="Cas Aki">Cas Aki</option>
+                                <option value="Body Repair">Body Repair</option>
+                                <option value="Body Dico">Body Dico</option>
+                                <option value="Service AC dan Isi Freon">Service AC dan Isi Freon</option>
+                            </select>
+                        </div>
+                        <div class="input-group input-group-outline is-filled mb-4">
                             <label for="merk" class="form-label">Merk</label>
                             <input type="text" class="form-control" name="merk" required>
                         </div>
-                        <div class="input-group input-group-outline mb-4">
+                        <div class="input-group input-group-outline is-filled mb-4">
                             <label for="harga" class="form-label">Harga</label>
                             <input type="text" class="form-control" name="harga" required>
                         </div>
-                        <div class="input-group input-group-outline mb-4">
+                        <div class="input-group input-group-outline is-filled mb-4">
                             <label for="stok" class="form-label">Stok</label>
                             <input type="text" class="form-control" name="stok" required>
                         </div>

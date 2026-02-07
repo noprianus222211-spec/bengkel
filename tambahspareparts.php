@@ -7,16 +7,17 @@
         $merk = $_POST['merk'];
         $harga = $_POST['harga'];
         $stok = $_POST['stok'];
+        $kategori_sparepart = $_POST['kategori_sparepart'];
 
         // Validate 'nama' and 'merk' - both must only contain letters
         $error = false;
         $errorMessage = '';
 
         // Check if 'nama' contains numbers
-        if (preg_match("/[0-9]/", $nama)) {
-            $error = true;
-            $errorMessage .= 'Nama hanya bisa berupa huruf, bukan angka. ';
-        }
+        // if (preg_match("/[0-9]/", $nama)) {
+        //     $error = true;
+        //     $errorMessage .= 'Nama hanya bisa berupa huruf, bukan angka. ';
+        // }
 
         // Check if 'merk' contains numbers
         if (preg_match("/[0-9]/", $merk)) {
@@ -42,8 +43,8 @@
         }
 
         // SQL query to insert data
-        $query = "INSERT INTO spareparts_222211 (222211_kodespareparts, 222211_namaspareparts, 222211_merkspareparts, 222211_hargaspareparts, 222211_stok) 
-                VALUES ('$kode', '$nama', '$merk', '$harga', '$stok')";
+        $query = "INSERT INTO spareparts_222211 (222211_kodespareparts, 222211_namaspareparts, 222211_merkspareparts, 222211_hargaspareparts, 222211_stok, 222211_kategori_sparepart) 
+                VALUES ('$kode', '$nama', '$merk', '$harga', '$stok', '$kategori_sparepart')";
 
         if (mysqli_query($conn, $query)) {
             echo "<script>alert('Data berhasil ditambahkan!'); window.location.href='spareparts.php';</script>";

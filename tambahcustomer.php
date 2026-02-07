@@ -10,7 +10,8 @@
         $jenis = $_POST['jenis'];
         $merk = $_POST['merk'];
         $tanggal_service = $_POST['tanggal_service'];
-        $kerusakan = $_POST['kerusakan'];
+        $kerusakanArray = json_decode($_POST['hidden_kerusakan'], true);
+        $kerusakan = implode(', ', $kerusakanArray);
         $hargajasa = $_POST['hargajasa'];
         $status = "Proses";
 
