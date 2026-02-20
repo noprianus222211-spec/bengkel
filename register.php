@@ -43,7 +43,7 @@
 
 <body class="bg-gray-200">
   <main class="main-content mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('assets/img/bg.jpg');">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('assets/img/bengkeltheo.png');">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container my-auto">
         <div class="row">

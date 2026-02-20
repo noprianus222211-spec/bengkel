@@ -13,9 +13,7 @@
 ?>
 
 <div class="container-fluid py-2">
-    <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#tambah">
-       Registration
-    </button>
+    
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -60,8 +58,8 @@
                                             <p class="text-md font-weight-bold mb-0"><?php echo $kendaraan['222211_tgl']; ?></p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-info" data-bs-target="#edit<?php echo $kendaraan['222211_kodecustomer']; ?>">Edit</a>
-                                            <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-danger" data-bs-target="#delete<?php echo $kendaraan['222211_kodecustomer']; ?>">Hapus</a>
+                                            <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-info" data-bs-target="#edit<?php echo $kendaraan['222211_kodecustomer']; ?>"></a>
+                                            <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-danger" data-bs-target="#delete<?php echo $kendaraan['222211_kodecustomer']; ?>"></a>
                                             <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-warning" data-bs-target="#info<?php echo $kendaraan['222211_kodecustomer']; ?>">Info</a>
                                         </td>
                                     </tr>

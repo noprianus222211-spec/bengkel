@@ -6,7 +6,7 @@ include 'index.php';
     <div class="row">
     <div class="col text-center mb-4">
     <div class="card" style="background-color:rgb(29, 95, 165); border: none; padding: 20px;">
-        <h4 class="text-white mt-3">29Garage Solusi Terbaik Untuk Mobil Anda</h4>
+        <h4 class="text-white mt-3">Bengkel Mobil Theo Solusi Terbaik Untuk Mobil Anda</h4>
         <p class="text-white">Kami menyediakan layanan perawatan dan perbaikan mobil untuk menjaga performa kendaraan Anda tetap optimal.</p>
     </div>
 </div>

@@ -70,10 +70,9 @@ $total_kembalian = 0;
 <body onload="window.print()">
 <div class="container mt-4">
     <div class="kop-surat text-center mb-4">
-        <h4 class="mb-2">Laporan Transaksi 29Garage</h4>
-        <p>Jalan Poros Toraja-Makassar, Mengkendek KM9, Sulawesi Selatan</p>
-        <p>noprianuskalalembang@gmail.com</p>
-        <p> Telp. 082292677514</p>
+        <h4 class="mb-2">Laporan Transaksi Bengkel Mobil Theo</h4>
+        <p>Jalan Perintis Kemerdekaan, KM.14</p>
+        <p> Telp. 085246464645</p>
     </div>
     <p class="text-center"><strong>Periode:</strong> <?php echo htmlspecialchars($tanggal_mulai); ?> - <?php echo htmlspecialchars($tanggal_akhir); ?></p>
 
@@ -132,7 +131,7 @@ $total_kembalian = 0;
         <div class="col-6 text-end">
             <p>Hormat Kami,</p>
             <br><br><br>
-            <p><strong>(29Garage)</strong></p>
+            <p><strong>(Fransiskus Joni P.)</strong></p>
         </div>
     </div>
 </div>

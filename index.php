@@ -33,7 +33,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand px-6 py-3 m-0" href="home.php" target="_blank">
         <img src="assets/img/logo.png" class="navbar-brand-img" width="26" height="26">
-        <span class="ms-1 text-sm text-dark">29Garage</span>
+        <span class="ms-1 text-sm text-dark">Bengkel Theo</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0 mb-2">
@@ -57,7 +57,7 @@
         <li class="nav-item">
           <a class="nav-link text-dark" href="kendaraan.php">
             <i class="fas fa-car"></i>
-            <span class="nav-link-text ms-3">Service Registration</span>
+            <span class="nav-link-text ms-3">Info Registration</span>
           </a>
         </li>
         <li class="nav-item">
@@ -72,7 +72,7 @@
         <li class="nav-item">
           <a class="nav-link text-dark" href="customer.php">
             <i class="fas fa-users"></i>
-            <span class="nav-link-text ms-3">Customer</span>
+            <span class="nav-link-text ms-3">Registration Customer</span>
           </a>
         </li>
         <li class="nav-item">

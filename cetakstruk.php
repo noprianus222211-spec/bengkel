@@ -53,7 +53,7 @@ while ($sparepart = mysqli_fetch_array($sparepartsQuery)) {
 <body onload="window.print()">
     <div class="kotak-struk">
         <div class="head">
-            <p class="logo">Struk Transaksi 29Garage</p>
+            <p class="logo">Struk Transaksi Bengkel Mobil Theo</p>
         </div>
         <div class="isi">
             <table class="tabel1">
