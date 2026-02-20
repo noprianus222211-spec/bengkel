@@ -6,14 +6,16 @@
         $merk = $_POST['merk'];
         $harga = $_POST['harga'];
         $stok = $_POST['stok'];
+        $estimasi = $_POST['estimasi'];
         $kategori_sparepart = $_POST['kategori_sparepart'];
 
         $query = "UPDATE spareparts_222211 SET 
         222211_kodespareparts='$kode', 
         222211_namaspareparts='$nama', 
         222211_merkspareparts='$merk', 
-        222211_hargaspareparts='$harga', 
-        222211_stok='$stok',
+        222211_hargaspareparts=$harga, 
+        222211_stok=$stok,
+        222211_estimasi='$estimasi',
         222211_kategori_sparepart='$kategori_sparepart'
         WHERE 222211_kodespareparts='$kode'";
 

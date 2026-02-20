@@ -215,10 +215,6 @@
                             <label for="tanggal_service" class="form-label">Tanggal Service</label>
                             <input type="date" class="form-control" name="tanggal_service" required>
                         </div>
-                        <!-- <div class="input-group input-group-outline is-filled mb-4">
-                            <label for="kerusakan" class="form-label">Kerusakan</label>
-                            <textarea name="kerusakan" class="form-control"></textarea>
-                        </div> -->
                         <label class="form-label">Kerusakan</label>
                         <input type="hidden" name="hidden_kerusakan" id="hidden_kerusakan">
                         <div class="input-group input-group-outline is-filled mb-1">

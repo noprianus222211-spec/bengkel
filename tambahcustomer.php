@@ -57,13 +57,15 @@
         $sparepartNames = [];
         $textDetail = '';
         $textTotal = 0;
+        $estimasi = 0;
         foreach ($spareparts as $kode_sparepart) {
-            $sparepartQuery = "SELECT 222211_namaspareparts, 222211_hargaspareparts  FROM spareparts_222211 WHERE 222211_kodespareparts = '$kode_sparepart'";
+            $sparepartQuery = "SELECT 222211_namaspareparts, 222211_hargaspareparts, 222211_estimasi  FROM spareparts_222211 WHERE 222211_kodespareparts = '$kode_sparepart'";
             $result = mysqli_query($conn, $sparepartQuery);
             if ($row = mysqli_fetch_assoc($result)) {
                 $sparepartNames[] = $row['222211_namaspareparts'];
                 $textDetail .= "• ". $row['222211_namaspareparts'] ." - ".rupiah($row['222211_hargaspareparts'])."\n";
                 $textTotal += $row['222211_hargaspareparts'];
+                $estimasi += $row['222211_estimasi'];
             }
             $updateStokQuery = "UPDATE spareparts_222211 SET 222211_stok = 222211_stok - 1 WHERE 222211_kodespareparts = '$kode_sparepart'";
             mysqli_query($conn, $updateStokQuery);
@@ -82,12 +84,12 @@
         $char = "TRNS";
         $kodetrx = $char . sprintf("%03s", $nourut);
         $textTotal += $hargajasa;
-        $add_transaction = mysqli_query($conn, "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_spareparts, 222211_hargajasa, 222211_total) 
-            VALUES ('$kodetrx', '$kode', '$sparepartNamesString', $hargajasa, $textTotal)");
+        $add_transaction = mysqli_query($conn, "INSERT INTO transaksi_222211 (222211_kodetransaksi, 222211_kodecustomer, 222211_spareparts, 222211_hargajasa, 222211_total, 222211_estimasi_pengerjaan) 
+            VALUES ('$kodetrx', '$kode', '$sparepartNamesString', $hargajasa, $textTotal, $estimasi)");
         // 
 
-        $query = mysqli_query($conn, "INSERT INTO kendaraan_222211 (222211_kodecustomer, 222211_plat, 222211_jenis, 222211_merk, 222211_tgl, 222211_kerusakan, 222211_status) 
-                VALUES ('$kode', '$plat', '$jenis', '$merk', '$tanggal_service', '$kerusakan', '$status')");
+        $query = mysqli_query($conn, "INSERT INTO kendaraan_222211 (222211_kodecustomer, 222211_plat, 222211_jenis, 222211_merk, 222211_tgl, 222211_kerusakan, 222211_status, 222211_estimasi_pengerjaan) 
+                VALUES ('$kode', '$plat', '$jenis', '$merk', '$tanggal_service', '$kerusakan', '$status', $estimasi)");
 
 
         $curl = curl_init();
@@ -103,7 +105,7 @@
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
         'target' => $notlp,
-        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n".$textDetail."• Harga Jasa Pengerjaan: ".rupiah($hargajasa)."\n\n"."Total: ".rupiah($textTotal)."\n\n" .
+        'message' => "Hi ".$nama.", estimasi perbaikan kendaraanmu:\n\n".$textDetail."• Harga Jasa Pengerjaan: ".rupiah($hargajasa)."\n\n"."Total: ".rupiah($textTotal)."\n\n"."Waktu pengerjaan: ".$estimasi." Jam"."\n\n" .
         "Terima kasih", 
         'countryCode' => '62',
         ),

@@ -35,6 +35,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Merk</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Harga</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Stok</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Estimasi Pengerjaan(Jam)</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
                                 </tr>
                             </thead>
@@ -50,6 +51,7 @@
                                     <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_merkspareparts']; ?></p></td>
                                     <td class="align-middle text-right"><p class="text-md font-weight-bold mb-0">Rp. <?php echo number_format($spareparts['222211_hargaspareparts']); ?></p></td>
                                     <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?php echo $spareparts['222211_stok']; ?></p></td>
+                                    <td class="align-middle text-center"><p class="text-md font-weight-bold mb-0"><?= $spareparts['222211_estimasi'] != ''? $spareparts['222211_estimasi'].' Jam': '-'; ?></p></td>
                                     <td class="align-middle text-center">
                                         <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-info" data-bs-target="#edit<?php echo $spareparts['222211_idspareparts']; ?>">Edit</a>
                                         <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-danger" data-bs-target="#delete<?php echo $spareparts['222211_idspareparts']; ?>">Hapus</a>
@@ -97,11 +99,15 @@
                                                     </div>
                                                     <div class="input-group input-group-outline is-filled mb-4">
                                                         <label for="harga" class="form-label">Harga</label>
-                                                        <input type="text" class="form-control" name="harga" value="<?php echo $spareparts['222211_hargaspareparts']; ?>" required>
+                                                        <input type="number" class="form-control" name="harga" value="<?php echo $spareparts['222211_hargaspareparts']; ?>" required>
                                                     </div>
                                                     <div class="input-group input-group-outline is-filled mb-4">
                                                         <label for="stok" class="form-label">Stok</label>
-                                                        <input type="text" class="form-control" name="stok" value="<?php echo $spareparts['222211_stok']; ?>" required>
+                                                        <input type="number" class="form-control" name="stok" value="<?php echo $spareparts['222211_stok']; ?>" required>
+                                                    </div>
+                                                    <div class="input-group input-group-outline is-filled mb-4">
+                                                        <label for="estimasi" class="form-label">Estimasi (Dalam Jam)</label>
+                                                        <input type="number" class="form-control" name="estimasi" value="<?php echo $spareparts['222211_estimasi']; ?>" required>
                                                     </div>
                                                     <div class="modal-footer justify-content-left">
                                                         <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Close</button>
@@ -176,11 +182,15 @@
                         </div>
                         <div class="input-group input-group-outline is-filled mb-4">
                             <label for="harga" class="form-label">Harga</label>
-                            <input type="text" class="form-control" name="harga" required>
+                            <input type="number" class="form-control" name="harga" required>
                         </div>
                         <div class="input-group input-group-outline is-filled mb-4">
                             <label for="stok" class="form-label">Stok</label>
-                            <input type="text" class="form-control" name="stok" required>
+                            <input type="number" class="form-control" name="stok" required>
+                        </div>
+                        <div class="input-group input-group-outline is-filled mb-4">
+                            <label for="estimasi" class="form-label">Estimasi (Dalam Jam)</label>
+                            <input type="number" class="form-control" name="estimasi" required>
                         </div>
                         <div class="modal-footer justify-content-left">
                             <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Close</button>

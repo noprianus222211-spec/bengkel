@@ -7,6 +7,7 @@
         $merk = $_POST['merk'];
         $harga = $_POST['harga'];
         $stok = $_POST['stok'];
+        $estimasi = $_POST['estimasi'];
         $kategori_sparepart = $_POST['kategori_sparepart'];
 
         // Validate 'nama' and 'merk' - both must only contain letters
@@ -43,8 +44,8 @@
         }
 
         // SQL query to insert data
-        $query = "INSERT INTO spareparts_222211 (222211_kodespareparts, 222211_namaspareparts, 222211_merkspareparts, 222211_hargaspareparts, 222211_stok, 222211_kategori_sparepart) 
-                VALUES ('$kode', '$nama', '$merk', '$harga', '$stok', '$kategori_sparepart')";
+        $query = "INSERT INTO spareparts_222211 (222211_kodespareparts, 222211_namaspareparts, 222211_merkspareparts, 222211_hargaspareparts, 222211_stok, 222211_kategori_sparepart, 222211_estimasi) 
+                VALUES ('$kode', '$nama', '$merk', $harga, $stok, '$kategori_sparepart', $estimasi)";
 
         if (mysqli_query($conn, $query)) {
             echo "<script>alert('Data berhasil ditambahkan!'); window.location.href='spareparts.php';</script>";

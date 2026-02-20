@@ -14,7 +14,8 @@ $sql = "
         222211_kategori_sparepart AS kategori,
         222211_kodespareparts AS kode,
         222211_namaspareparts AS nama,
-        222211_hargaspareparts AS harga
+        222211_hargaspareparts AS harga,
+        222211_estimasi AS estimasi
     FROM spareparts_222211
     $where
     ORDER BY kategori, nama
