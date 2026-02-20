@@ -204,7 +204,6 @@
                             <select name="jenis" class="form-control">
                                 <option disabled selected>-- Jenis Kendaraan --</option>
                                 <option value="Mobil">Mobil</option>
-                                <option value="Motor">Motor</option>
                             </select>
                         </div>
                         <div class="input-group input-group-outline mb-4">

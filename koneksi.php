@@ -1,7 +1,7 @@
 <?php
 $hostname = 'localhost';
 $username = 'root';
-$password = '';
+$password = 'root';
 $dbname = 'bengkel_222211';
 
 $token = 'u6GyYpgqkA8gWy688PDp';
