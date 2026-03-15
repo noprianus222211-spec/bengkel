@@ -5,6 +5,7 @@
         $nama = $_POST['nama'];
         $merk = $_POST['merk'];
         $harga = $_POST['harga'];
+        $hargajasa = $_POST['hargajasa'];
         $stok = $_POST['stok'];
         $estimasi = $_POST['estimasi'];
         $kategori_sparepart = $_POST['kategori_sparepart'];
@@ -14,6 +15,7 @@
         222211_namaspareparts='$nama', 
         222211_merkspareparts='$merk', 
         222211_hargaspareparts=$harga, 
+        222211_hargajasa=$hargajasa, 
         222211_stok=$stok,
         222211_estimasi='$estimasi',
         222211_kategori_sparepart='$kategori_sparepart'

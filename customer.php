@@ -241,7 +241,7 @@
 
                         <div class="input-group input-group-outline is-filled mb-3">
                             <label class="form-label">Harga Jasa</label>
-                            <input type="number" name="hargajasa" class="form-control" placeholder="0" required>
+                            <input id="jasaInput" type="number" name="hargajasa" class="form-control" placeholder="0" required>
                         </div>
                         <div class="modal-footer justify-content-left">
                             <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Close</button>
@@ -403,9 +403,6 @@ document.addEventListener('click', e => {
     }
 });
 
-/* =======================
-   FILTER SPAREPART GROUP
-======================= */
 function loadSparepartsAjax() {
 
     const container = document.getElementById('sparepart-container');
@@ -446,7 +443,7 @@ function loadSparepartsAjax() {
                 const item = document.createElement('div');
                 item.className = 'sparepart-item';
                 item.innerHTML = `
-                    <input type="checkbox" name="spareparts[]" value="${sp.kode}">
+                    <input type="checkbox" class="jasa-checkbox" name="spareparts[]" data-jasa="${sp.hargajasa}" value="${sp.kode}">
                     ${sp.nama} - <b>${formatRupiah(sp.harga)}</b>
                 `;
 
@@ -454,6 +451,23 @@ function loadSparepartsAjax() {
             });
         });
 }
+
+function hitungTotalHarga() {
+    let total = 0;
+
+    document.querySelectorAll('.jasa-checkbox:checked').forEach(function(el) {
+        total += parseInt(el.dataset.jasa);
+    });
+
+    document.getElementById('jasaInput').value = total;
+}
+
+document.getElementById('sparepart-container').addEventListener('change', function(e) {
+    if (e.target.classList.contains('jasa-checkbox')) {
+        hitungTotalHarga();
+    }
+});
+
 function formatRupiah(angka) {
     return new Intl.NumberFormat('id-ID', {
         style: 'currency',

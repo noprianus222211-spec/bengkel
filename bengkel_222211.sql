@@ -61,6 +61,25 @@ INSERT INTO `customer_222211` (`222211_idcustomer`, `222211_kodecustomer`, `2222
 (14,	'CUST011',	'Yohanes Albert',	'082188941616'),
 (15,	'CUST012',	'Nopri Testing',	'082292677514');
 
+DROP TABLE IF EXISTS `mekanik_222211`;
+CREATE TABLE `mekanik_222211` (
+  `222211_idmekanik` int(12) NOT NULL AUTO_INCREMENT,
+  `222211_kodemekanik` varchar(100) DEFAULT NULL,
+  `222211_namamekanik` varchar(100) DEFAULT NULL,
+  `222211_status` enum('Tersedia','Tidak Tersedia') DEFAULT NULL,
+  PRIMARY KEY (`222211_idmekanik`),
+  UNIQUE KEY `222211_kodemekanik` (`222211_kodemekanik`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `mekanik_222211` (`222211_idmekanik`, `222211_kodemekanik`, `222211_namamekanik`, `222211_status`) VALUES
+(4,	'MKNK003',	'Bro Rensa',	'Tidak Tersedia'),
+(5,	'MKNK004',	'Bro ebi',	'Tersedia'),
+(6,	'MKNK005',	'Boss Nopri',	'Tidak Tersedia'),
+(7,	'MKNK006',	'bro hendro',	'Tidak Tersedia'),
+(8,	'MKNK007',	'bro imbo',	'Tidak Tersedia'),
+(9,	'MKNK008',	'theo',	'Tersedia'),
+(10,	'MKNK009',	'nopri',	'Tidak Tersedia');
+
 DROP TABLE IF EXISTS `kendaraan_222211`;
 CREATE TABLE `kendaraan_222211` (
   `222211_idkendaraan` int(12) NOT NULL AUTO_INCREMENT,
@@ -94,25 +113,6 @@ INSERT INTO `kendaraan_222211` (`222211_idkendaraan`, `222211_kodecustomer`, `22
 (13,	'CUST010',	'XXFFFFXX',	'Mobil',	'Toyota',	'2026-02-20',	'Ganti Oli',	NULL,	'Proses',	NULL,	0),
 (14,	'CUST011',	'XXFFFFXX',	'Mobil',	'Toyota',	'2026-02-20',	'Ganti Oli',	NULL,	'Proses',	NULL,	3),
 (15,	'CUST012',	'XXFFFFXX',	'Mobil',	'Toyota',	'2026-02-20',	'Ganti Oli',	NULL,	'Proses',	NULL,	3);
-
-DROP TABLE IF EXISTS `mekanik_222211`;
-CREATE TABLE `mekanik_222211` (
-  `222211_idmekanik` int(12) NOT NULL AUTO_INCREMENT,
-  `222211_kodemekanik` varchar(100) DEFAULT NULL,
-  `222211_namamekanik` varchar(100) DEFAULT NULL,
-  `222211_status` enum('Tersedia','Tidak Tersedia') DEFAULT NULL,
-  PRIMARY KEY (`222211_idmekanik`),
-  UNIQUE KEY `222211_kodemekanik` (`222211_kodemekanik`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `mekanik_222211` (`222211_idmekanik`, `222211_kodemekanik`, `222211_namamekanik`, `222211_status`) VALUES
-(4,	'MKNK003',	'Bro Rensa',	'Tidak Tersedia'),
-(5,	'MKNK004',	'Bro ebi',	'Tersedia'),
-(6,	'MKNK005',	'Boss Nopri',	'Tidak Tersedia'),
-(7,	'MKNK006',	'bro hendro',	'Tidak Tersedia'),
-(8,	'MKNK007',	'bro imbo',	'Tidak Tersedia'),
-(9,	'MKNK008',	'theo',	'Tersedia'),
-(10,	'MKNK009',	'nopri',	'Tidak Tersedia');
 
 DROP TABLE IF EXISTS `spareparts_222211`;
 CREATE TABLE `spareparts_222211` (

@@ -5,10 +5,8 @@
 session_start();
 
 // Koneksi ke database
-$host = "localhost"; // Ganti dengan host database Anda
-$user = "root";      // Ganti dengan username database Anda
-$pass = "";          // Ganti dengan password database Anda
-$dbname = "bengkel_222211"; // Ganti dengan nama database Anda
+
+include 'koneksi.php';
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 

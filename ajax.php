@@ -15,6 +15,7 @@ $sql = "
         222211_kodespareparts AS kode,
         222211_namaspareparts AS nama,
         222211_hargaspareparts AS harga,
+        222211_hargajasa AS hargajasa,
         222211_estimasi AS estimasi
     FROM spareparts_222211
     $where
