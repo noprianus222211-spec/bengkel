@@ -52,6 +52,8 @@ $kode = $char . sprintf("%03s", $nourut);
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Merk</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Tgl</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Pembayaran</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Harga Jasa</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Total</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
                                 </tr>
                             </thead>
@@ -69,15 +71,50 @@ $kode = $char . sprintf("%03s", $nourut);
                                         <td class="align-middle text-center"><?php echo $transaksi['222211_merk']; ?></td>
                                         <td class="align-middle text-center"><?php echo $transaksi['222211_tgl']; ?></td>
                                         <td class="align-middle text-center"><?php echo $transaksi['222211_pembayaran']; ?></td>
+                                        <td class="align-middle text-center">Rp. <?php echo number_format($transaksi['222211_hargajasa']); ?></td>
+                                        <td class="align-middle text-center">Rp. <?php echo number_format($transaksi['222211_total']); ?></td>
                                         <td class="align-middle text-center">
                                             <?php if ($transaksi['222211_pembayaran'] == 'Berhasil') { ?>
                                                 <a target="blank" href="cetakstruk.php?kode=<?php echo $transaksi['222211_kodecustomer']; ?>" class="badge badge-sm bg-info">Cetak Struk</a>
                                             <?php } else { ?>
+                                                    <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-secondary" data-bs-target="#editharga<?php echo $transaksi['222211_kodecustomer']; ?>">Edit Harga</a>
                                                 <a href="#" data-bs-toggle="modal" class="badge badge-sm bg-success" data-bs-target="#bayar<?php echo $transaksi['222211_kodecustomer']; ?>">Bayar</a>
                                             <?php } ?>
                                         </td>
                                     </tr>
 
+                                    <div class="modal fade" id="editharga<?php echo $transaksi['222211_kodecustomer']; ?>" tabindex="-1" aria-labelledby="bayar" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Update Harga</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="prosesupdateharga.php" method="POST">
+                                                        <?php
+                                                            $data = mysqli_query($conn, "SELECT * FROM transaksi_222211 WHERE 222211_kodecustomer = '".$transaksi['222211_kodecustomer']."' LIMIT 1");
+                                                            $dataspare = mysqli_fetch_array($data);
+                                                        ?>
+                                                        <input type="hidden" name="kode_customer" value="<?php echo $transaksi['222211_kodecustomer']; ?>">
+                                                        <div class="input-group input-group-outline is-filled mb-3">
+                                                            <label class="form-label">Harga Jasa</label>
+                                                            <input type="number" name="hargajasa" class="form-control" value="<?=$dataspare['222211_hargajasa']?>">
+                                                        </div>
+                                                        <div class="input-group input-group-outline is-filled mb-3">
+                                                            <label class="form-label">Total</label>
+                                                            <input type="number" name="total" class="form-control" value="<?=$dataspare['222211_total']?>">
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn bg-gradient-dark" name="update_harga">Update Harga</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal fade" id="bayar<?php echo $transaksi['222211_kodecustomer']; ?>" tabindex="-1" aria-labelledby="bayar" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">

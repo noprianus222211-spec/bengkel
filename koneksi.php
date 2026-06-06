@@ -1,8 +1,8 @@
 <?php
 $hostname = 'localhost';
-$username = 'bengkelt';
-$password = '1i00dPbu5zfa';
-$dbname = 'bengkelt_bengkel_222211';
+$username = 'root';
+$password = '';
+$dbname = 'bengkel_222211';
 
 $token = 'u6GyYpgqkA8gWy688PDp';
 

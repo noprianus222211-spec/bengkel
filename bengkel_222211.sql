@@ -247,13 +247,33 @@ CREATE TABLE `viewcust` (
 	`222211_tgl` DATE NULL,
 	`222211_kerusakan` VARCHAR(100) NULL COLLATE 'utf8mb4_general_ci',
 	`222211_kodecustomer` VARCHAR(100) NULL COLLATE 'utf8mb4_general_ci',
-	`222211_pembayaran` VARCHAR(100) NULL COLLATE 'utf8mb4_general_ci'
+	`222211_pembayaran` VARCHAR(100) NULL COLLATE 'utf8mb4_general_ci',
+	`222211_hargajasa` VARCHAR(100) NULL COLLATE 'utf8mb4_general_ci',
+	`222211_total` VARCHAR(100) NULL COLLATE 'utf8mb4_general_ci'
 ) ENGINE=MyISAM;
 
 -- Dumping structure for view bengkel_222211.viewcust
 -- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `viewcust`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewcust` AS SELECT `customer_222211`.`222211_nama` AS `222211_nama`, `customer_222211`.`222211_notlp` AS `222211_notlp`, `kendaraan_222211`.`222211_plat` AS `222211_plat`, `kendaraan_222211`.`222211_jenis` AS `222211_jenis`, `kendaraan_222211`.`222211_merk` AS `222211_merk`, `kendaraan_222211`.`222211_tgl` AS `222211_tgl`, `kendaraan_222211`.`222211_kerusakan` AS `222211_kerusakan`, `customer_222211`.`222211_kodecustomer` AS `222211_kodecustomer`, `kendaraan_222211`.`222211_pembayaran` AS `222211_pembayaran` FROM (`customer_222211` join `kendaraan_222211` on(`customer_222211`.`222211_kodecustomer` = `kendaraan_222211`.`222211_kodecustomer`)) ;
+CREATE VIEW `viewcust` AS
+SELECT
+  customer_222211.`222211_nama` AS `222211_nama`,
+  customer_222211.`222211_notlp` AS `222211_notlp`,
+  kendaraan_222211.`222211_plat` AS `222211_plat`,
+  kendaraan_222211.`222211_jenis` AS `222211_jenis`,
+  kendaraan_222211.`222211_merk` AS `222211_merk`,
+  kendaraan_222211.`222211_tgl` AS `222211_tgl`,
+  kendaraan_222211.`222211_kerusakan` AS `222211_kerusakan`,
+  customer_222211.`222211_kodecustomer` AS `222211_kodecustomer`,
+  kendaraan_222211.`222211_pembayaran` AS `222211_pembayaran`,
+  transaksi_222211.`222211_hargajasa` AS `222211_hargajasa`,
+  transaksi_222211.`222211_total` AS `222211_total`
+FROM customer_222211
+JOIN kendaraan_222211
+  ON customer_222211.`222211_kodecustomer`
+   = kendaraan_222211.`222211_kodecustomer`
+   JOIN transaksi_222211 ON customer_222211.`222211_kodecustomer`
+   = transaksi_222211.`222211_kodecustomer`;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
