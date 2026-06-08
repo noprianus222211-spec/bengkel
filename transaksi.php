@@ -97,13 +97,28 @@ $kode = $char . sprintf("%03s", $nourut);
                                                             $dataspare = mysqli_fetch_array($data);
                                                         ?>
                                                         <input type="hidden" name="kode_customer" value="<?php echo $transaksi['222211_kodecustomer']; ?>">
-                                                        <div class="input-group input-group-outline is-filled mb-3">
-                                                            <label class="form-label">Harga Jasa</label>
-                                                            <input type="number" name="hargajasa" class="form-control" value="<?=$dataspare['222211_hargajasa']?>">
-                                                        </div>
-                                                        <div class="input-group input-group-outline is-filled mb-3">
-                                                            <label class="form-label">Total</label>
-                                                            <input type="number" name="total" class="form-control" value="<?=$dataspare['222211_total']?>">
+                                                        <input type="hidden" name="estimasi" value="<?php echo $dataspare['222211_estimasi_pengerjaan']; ?>">
+                                                        <div class="spare-item">
+                                                            <div class="input-group input-group-outline is-filled mb-3">
+                                                                <label class="form-label">Harga Jasa</label>
+                                                                <input
+                                                                    type="number"
+                                                                    name="hargajasa"
+                                                                    class="form-control hargajasa"
+                                                                    value="<?= $dataspare['222211_hargajasa'] ?>"
+                                                                >
+                                                            </div>
+
+                                                            <div class="input-group input-group-outline is-filled mb-3">
+                                                                <label class="form-label">Total</label>
+                                                                <input
+                                                                    type="number"
+                                                                    name="total"
+                                                                    class="form-control total"
+                                                                    readonly
+                                                                    value="<?= $dataspare['222211_total'] ?>"
+                                                                >
+                                                            </div>
                                                         </div>
 
                                                         <div class="modal-footer">
@@ -226,4 +241,19 @@ $kode = $char . sprintf("%03s", $nourut);
         const kembalian = jumlahUang - parseFloat(total);
         document.getElementById('kembalian_' + kodeCustomer).value = kembalian >= 0 ? kembalian : 0;
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.spare-item').forEach(function (item) {
+            const hargaJasa = item.querySelector('.hargajasa');
+            const total = item.querySelector('.total');
+
+            const hargaJasaAwal = Number(hargaJasa.value) || 0;
+            const totalAwal = Number(total.value) || 0;
+            const fixedValue = totalAwal - hargaJasaAwal;
+
+            hargaJasa.addEventListener('input', function () {
+                const hargaJasaBaru = Number(this.value) || 0;
+                total.value = fixedValue + hargaJasaBaru;
+            });
+        });
+    });
 </script>
